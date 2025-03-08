@@ -7,5 +7,6 @@ import com.example.demo.entity.User;
 public interface UserService {
     List<User> getAllUsers();
     User getUserById(Long id);
+    User deleteUser(Long id);
     User createUser(User user);
 }

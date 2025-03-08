@@ -28,6 +28,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new RuntimeException("Email đã tồn tại!"); // Ném thông báo ở đây
+        }
         return userRepository.save(user);
     }
+    @Override
+    public User deleteUser(Long id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User không tồn tại!"));
+        userRepository.deleteById(id);
+        return user; // Trả về user đã xóa
+    }
+    
+    
 }
